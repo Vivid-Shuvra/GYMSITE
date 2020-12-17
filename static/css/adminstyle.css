@@ -1,0 +1,39 @@
+body {
+  color: rgb(15, 3, 3);
+  background: rgb(100, 14, 27);
+}
+#header {
+  background: #a11f2a;
+  color: #ffc;
+}
+
+div.breadcrumbs {
+  background: rgb(19, 1, 1);
+  padding: 10px 40px;
+  border: none;
+  font-size: 14px;
+  color: #c4dce8;
+  text-align: left;
+}
+.button,
+.submit-row input,
+a.button {
+  background: rgb(19, 1, 1);
+  color: #fff;
+  cursor: pointer;
+}
+.module h2,
+.module caption,
+.inline-group h2 {
+  margin: 0;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 13px;
+  text-align: left;
+  background: rgb(19, 1, 1);
+  color: #fff;
+}
+
+div .results {
+  color: black;
+}
