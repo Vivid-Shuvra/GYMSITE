@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+<main>
+     <!--Slider-->
+     <div id="slider" class="container-fluid mt-0 px-0">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static 'img/hero/hero2.png' %}" alt="First slide"  height="300">
+                <div class="carousel-caption d-none d-md-block" style="text-transform: uppercase;">
+                  <h1 class="fade-in">Blog Details</h1>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <hr />
+        <div class="container mx-auto my-3">
+          <h2 class="text-light my-3" style="text-transform: uppercase; text-shadow: 0 0 3px #fa0000, 0 0 5px #0808f3;">{{blog.title}}</h2>
+          <div class="row">
+          <div class="col my-3">
+            <img src="{{blog.image.url}}" alt="" style="height:50%; width: 100%;">
+          </div>
+          <div class="col my-3 text-light">
+            {{blog.content|safe}}
+          </div>
+        </div>
+          <div class="mt-2">
+            <p class="text-light">Posted on <span class="badge badge-warning">{{blog.time}}</span></p>
+          </div>
+      </div>
+</main>
+{% endblock %}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymHut | Fancy Gym World</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- CSS here -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        
+body {
+  margin: 0;
+  color: #24252b;
+  background: url(static/img/gallery/registration1.jpg) no-repeat center center fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font: 600 16px/18px "Open Sans", sans-serif;
+}
+
+.login-box {
+  width: 100%;
+  margin: auto;
+  max-width: 525px;
+  min-height: 670px;
+  position: relative;
+  background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80)
+    no-repeat center ;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-snip {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 90px 70px 50px 70px;
+  background: rgba(173, 24, 24, 0.9);
+}
+
+.login-snip .login,
+.login-snip .sign-up-form {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  transition: all 0.4s linear;
+}
+
+.login-snip .sign-in,
+.login-snip .sign-up,
+.login-space .group .check {
+  display: none;
+}
+
+.login-snip .tab,
+.login-space .group .label,
+.login-space .group .button {
+  text-transform: uppercase;
+}
+
+.login-snip .tab {
+  font-size: 22px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  margin: 0 15px 10px 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+.login-snip .sign-in:checked + .tab,
+.login-snip .sign-up:checked + .tab {
+  color: #fff;
+  border-color: #440115;
+}
+
+.login-space {
+  min-height: 345px;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.login-space .group {
+  margin-bottom: 15px;
+}
+
+.login-space .group .label,
+.login-space .group .input,
+.login-space .group .button {
+  width: 100%;
+  color: #fff;
+  display: block;
+}
+
+.login-space .group .input,
+.login-space .group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-space .group input[data-type="password"] {
+  text-security: circle;
+  -webkit-text-security: circle;
+}
+
+.login-space .group .label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.login-space .group .button {
+  background: #e27676;
+  cursor: pointer;
+}
+
+.login-space .group .button:hover {
+  background-color: #460213;
+}
+
+.login-space .group .button:active {
+  background-color: #4b010e;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.login-space .group label .icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-space .group label .icon:before,
+.login-space .group label .icon:after {
+  content: "";
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.login-space .group label .icon:before {
+  left: 3px;
+  width: 5px;
+  bottom: 6px;
+  transform: scale(0) rotate(0);
+}
+
+.login-space .group label .icon:after {
+  top: 6px;
+  right: 0;
+  transform: scale(0) rotate(0);
+}
+
+.login-space .group .check:checked + label {
+  color: #fff;
+}
+
+.login-space .group .check:checked + label .icon {
+  background: #df0505;
+}
+
+.login-space .group .check:checked + label .icon:before {
+  transform: scale(1) rotate(45deg);
+}
+
+.login-space .group .check:checked + label .icon:after {
+  transform: scale(1) rotate(-45deg);
+}
+
+.login-snip .sign-in:checked + .tab + .sign-up + .tab + .login-space .login {
+  transform: rotate(0);
+}
+
+.login-snip .sign-up:checked + .tab + .login-space .sign-up-form {
+  transform: rotate(0);
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+.clearfix:after,
+.clearfix:before {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.foot {
+  text-align: center;
+  color: whitesmoke;
+}
+
+.card {
+  width: 500px;
+  left: 100px;
+}
+
+::placeholder {
+  color: #b3b3b3;
+}
+
+span {
+  content: "\2190";
+}
+
+    </style>
+</head>
+<body>
+    
+<main>
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgb(70, 1, 15); align-items: center;">
+            <div class="logo mx-auto" style=" width: 90; ">
+                <a href="/"><img src="{% static 'img/logo/gymlogo.png' %}" alt=""> <img src="{% static 'img/logo/logos.png' %}" alt=""></a>
+            </div>
+            <a href="/" class="btn btn-outline-danger" style="color: whitesmoke;">Back to Home<span>&#8592;</span></a>
+          </nav>
+    
+    <div class="alert alert-danger alert-dismissible fade show sticky-top" role="alert">
+      <strong>Hey User!</strong> Please enter your valid information to proceed further. 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6 mx-auto p-0">
+            <div class="card m-3">
+                <div class="login-box">
+                    <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Log In</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                        <div class="login-space">
+                            <div class="login">
+                                <form action="/login" method="POST">
+                                    {% csrf_token %}
+                                    {% if err %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{err}}
+                                </div>
+                                {% endif %}
+                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" name="username" placeholder="Enter your username" required> </div>
+                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" name="userpass" data-type="password" placeholder="Enter your password" required> </div>
+                                <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div>
+                                <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
+                                <div class="hr"></div>
+                                <div class="foot"> <a href="#">Forgot Password?</a> </div>
+                                </form>
+                            </div>
+                            <div class="sign-up-form">
+                                <form action="/registration" method="POST">
+                                    {% csrf_token %}
+                                {% if error %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{error}}
+                                </div>
+                                {% endif %}
+                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" name="name" value="{{values.name}}" placeholder="Create your Username" required> </div>
+                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" name="email" value="{{values.email}}" placeholder="Enter your email address" required> </div>
+                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" name="password" data-type="password" placeholder="Create your password" required> </div>
+                                <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+                                <div class="hr"></div>
+                                <div class="foot"> <label for="tab-1">Already Member?</label> </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <br>
+      <div id="social" class="row">
+        <div class="col mx-auto text-center">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-instagram"></a>
+      </div>
+    </div>
+      <br>
+    <footer>
+      <div class="footer-copyright text-center py-3 sticky-bottom" style="color: whitesmoke;">  Copyright &copy;<script>document.write(new Date().getFullYear());</script> | All rights reserved:
+          <h6>Curated with <i class="fa fa-heart" aria-hidden="true" style="color: crimson;"></i> by Myself</h6>
+          </div>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+var scrolltotop={setting:{startline:100,scrollto:0,scrollduration:1e3,fadeduration:[500,100]},
+controlHTML:'<img src="https://i1155.photobucket.com/albums/p559/scrolltotop/arrow23.png" />',
+controlattrs:{offsetx:5,offsety:5},anchorkeyword:"#top",state:{isvisible:!1,shouldvisible:!1},
+scrollup:function(){this.cssfixedsupport||this.$control.css({opacity:0});
+var t=isNaN(this.setting.scrollto)?this.setting.scrollto:parseInt(this.setting.scrollto);
+t="string"==typeof t&&1==jQuery("#"+t).length?jQuery("#"+t).offset().top:0,this.$body.animate({scrollTop:t},this.setting.scrollduration)},
+keepfixed:function(){var t=jQuery(window),o=t.scrollLeft()+t.width()-this.$control.width()-this.controlattrs.offsetx,s=t.scrollTop()+t.height()-this.$control.height()-this.controlattrs.offsety;this.$control.css({left:o+"px",top:s+"px"})},
+togglecontrol:function(){var t=jQuery(window).scrollTop();this.cssfixedsupport||this.keepfixed(),this.state.shouldvisible=t>=this.setting.startline?!0:!1,this.state.shouldvisible&&!this.state.isvisible?(this.$control.stop().animate({opacity:1},
+this.setting.fadeduration[0]),this.state.isvisible=!0):0==this.state.shouldvisible&&this.state.isvisible&&(this.$control.stop().animate({opacity:0},this.setting.fadeduration[1]),this.state.isvisible=!1)},
+init:function(){jQuery(document).ready(function(t){var o=scrolltotop,s=document.all;o.cssfixedsupport=!s||s&&"CSS1Compat"==document.compatMode&&window.XMLHttpRequest,o.$body=t(window.opera?"CSS1Compat"==document.compatMode?"html":"body":"html,body"),
+o.$control=t('<div id="topcontrol">'+o.controlHTML+"</div>").css({position:o.cssfixedsupport?"fixed":"absolute",bottom:o.controlattrs.offsety,right:o.controlattrs.offsetx,opacity:0,cursor:"pointer"}).attr({title:"Scroll to Top"}).click(function(){return o.scrollup(),!1}).appendTo("body"),
+document.all&&!window.XMLHttpRequest&&""!=o.$control.text()&&o.$control.css({width:o.$control.width()}),o.togglecontrol(),t('a[href="'+o.anchorkeyword+'"]').click(function(){return o.scrollup(),!1}),t(window).bind("scroll resize",function(t){o.togglecontrol()})})}};scrolltotop.init();
+</script>
+</main>
+
+<!-- One Page, Animated-HeadLin -->
+<script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>

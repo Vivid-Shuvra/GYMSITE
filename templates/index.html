@@ -1,0 +1,198 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+{% load embed_video_tags %}
+<main>
+  <!--Slider-->
+    <div id="slider" class="container-fluid mt-0 px-0">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
+                <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-danger py-2 text-white px-1 news"><span class="d-flex align-items-center">&nbsp;Blog Headlines</span></div>
+                <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();"> 
+                  {% for blog in blogs %}
+                  <a href="/blogdetails/{{blog.slug}}" style="color:crimson; text-transform: uppercase;"><b> {{blog.title}}</b> </a> <span class="dot"></span>
+                  {% endfor %}
+                 </marquee>
+                </div>
+        </div>
+    </div>
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static 'img/hero/h1_hero.png' %}" alt="First slide"  height="500">
+                <div class="carousel-caption d-none d-md-block" style="text-transform: uppercase;">
+                  <h2 class="fade-in">Welcome to GymHut!</h2> <h4 style="color: rgba(136, 91, 91, 0.5) !important">Fancy Gym World</h4>
+                  <div>
+                  <a href="/about" class="btn btn-outline-danger" style="color: wheat; border-color: wheat;">About Us</a>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        </div>
+        <hr />
+        
+        <!--Training-->
+
+        <div id="course-details" class="offset-0 float-md-center">
+          <div class="row py-3">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mx-auto">
+            <div class="jumbotron jumbotron-fluid" style="background:url(static/img/gallery/cat1.png); background-size: cover;">
+              <div class="container">
+                <h3 class="display-5 text-center" style="color: whitesmoke;text-transform: uppercase;">Personal Training</h3>
+                <p class="lead text-center" style="color: whitesmoke;"> <strong>You can join a trainer personally as per schedule.</strong> </p>
+                <div style="text-align: center;">
+                  <a href="/schedule" class="btn btn-outline-danger btn-lg" style="color: wheat; border-color: wheat;"><b>View Details</b></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5  mx-auto">
+            <div class="jumbotron jumbotron-fluid" style="background:url(static/img/gallery/cat2.png); background-size: cover;">
+              <div class="container">
+                <h3 class="display-5 text-center" style="color: whitesmoke;text-transform: uppercase;">Group Training</h3>
+                <p class="lead text-center" style="color: whitesmoke;"><strong>You can join a trainer in group as per schedule.</strong></p>
+                <div style="text-align: center;">
+                  <a href="/schedule" class="btn btn-outline-danger btn-lg" style="color: wheat; border-color: wheat;"><b>View Details</b></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+        <!--Courses-->
+        <div class="container-fluid">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="fade-in text-center">
+                      <h2 style="color: white; text-transform: uppercase;" >What We Offer</h2>
+                  </div>
+              </div>
+          </div>
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner row w-100 mx-auto">
+              <div class="carousel-item col-md-4 active">
+                <div class="card">
+                  <img class="card-img-top img-fluid" src="{% static 'img/gallery/team2.png' %}" alt="Card image cap">
+                  <div class="card-body" style="background: rgb(114, 63, 54);">
+                    <div><h4 class="card-title" style="color: thistle;">Our Courses</h4></div>
+                    <div><p class="card-text" style="color: thistle;">Watch out our offers to our users to make them all optimised. Join our courses to improve your body as well as health status </p></div>
+                    <div><a href="/courses" class="btn btn-danger btn-block">See More</a></div>
+                  </div>
+                </div>
+              </div>
+              {% for category in categories %}
+              <div class="carousel-item col-md-4">
+                <div class="card">
+                  <img class="card-img-top img-fluid" src="{{category.images.url}}" alt="Card image cap">
+                  <div class="card-body" style="background: rgb(114, 63, 54);">
+                    <div>
+                      <h4 class="card-title" style="color: thistle;">{{category.name}}</h4>
+                    </div>
+                    <div>
+                      <p class="card-text" style="color: thistle;">{{category.descr_short|slice:300}}</p>
+                    </div>
+                    <div> <a href="/coursedetails/{{category.slug}}" class="btn btn-danger btn-block">See More</a></div>
+                   
+                  </div>
+                </div>
+              </div>
+              {% endfor %} 
+              
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon rounded" aria-hidden="true" style="background-color: black;"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon rounded" aria-hidden="true" style="background-color: black; "></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          </div>
+          <br>
+          
+          <!--Gallery-->
+            <div id="gallery" class="container" style="background: url(static/img/gallery/registration.jpg) no-repeat center center fixed;">
+              <div class="row">
+                {% for gallery in galleries %}
+                <div class="col-md-4 ">
+                  <div class="card-group">
+                  <div class="card mb-3 shadow p-3 mb-5 rounded " style="width: 18rem; background-size: cover;">
+                    <img class="card-img" src="{{gallery.images.url}}" alt="Card image cap">
+                    <div class="card-img-overlay">
+                    <div class="card-body d-flex flex-column mb-3">
+                      <h4 class="card-title float-left" style="text-transform: uppercase; color: whitesmoke;">{{gallery.name}}</h4>
+                      <div class="position-sticky" >
+                      <a href="/gallery" class=" btn btn-outline-danger float-right "><i class="fa fa-plus-square fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %} 
+              </div>
+            </div>
+          
+
+            <!--About Us-->
+            <div class="container">
+              <hr style="background-color: thistle;">
+            <div class="row">
+              <div class="col-sm">
+                <img src="{% static 'img/gallery/about.png' %}" alt="" style="max-width:100%; 
+                height:auto; ">
+              </div>
+              <div class="col-sm">
+                {% for about in abouts %}
+                    <div class="front-text">
+                        <h1 style="text-transform: uppercase; color: blanchedalmond;">{{about.name}}</h1>
+                        <br>
+                        <p style="color: blanchedalmond;"> {{about.descriptionOne}}</p>
+                        <p class="mb-40" style="color: blanchedalmond;">{{about.descriptionTwo}}</p>
+                        <br>
+                        <a href="/courses" class="btn btn-danger btn-lg" style="text-transform: uppercase;">Our Courses</a>
+                    </div>
+                    {% endfor %}
+              </div>
+            </div>
+            <hr style="background-color: thistle;">
+          </div>
+
+          <!--Video-->
+          <section class="text-center">
+            <div id="carouselExample" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img data-toggle="modal" data-target="#myModal" data-src="https://www.youtube.com/embed/v=0UscoQcmBRI"  class="img-responsive" src="{% static 'img/gallery/video-bg.png' %}" onclick="playVid()"  /> 
+                  <div class="carousel-caption d-none d-md-block" style="text-transform: uppercase;">
+                    <h1>Click to Watch</h1>
+                    <button type="button" class="btn video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/v=0UscoQcmBRI" data-target="#myModal" >
+                      <i class="fa fa-play fa-3x" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+            </div>
+          </section>
+          
+          <!-- Home Video Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>        
+                  <!-- 16:9 aspect ratio -->
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/v=0UscoQcmBRI" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+          </div> 
+                </div>
+              </div>
+            </div>
+          </div> 
+
+        </main>
+        
+{% endblock %}

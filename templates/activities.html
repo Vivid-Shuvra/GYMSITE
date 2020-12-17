@@ -1,0 +1,117 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<main>
+    <h2 class="text-center"><small class="text-muted">My Activities</small></h2>
+
+    <div class="container bordered rounded">
+        <div class="row mx-auto">
+        <div class="col-8">
+            <h3 class="text-center"><small class="text-muted">Activity List</small></h3>
+        <div class="table-responsive-md mx-auto">
+            <table class="table table-striped table-hover table-bordered text-center">
+                <thead class="bg-danger">
+                    <tr>              
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activities %}
+                    <tr class="text-light">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{activity.title}}</td>
+                    <td>{{activity.types}}</td>
+                    <td>{{activity.duration}}</td>
+                    <td>{{activity.date}}</td>
+                    <td style="text-align:center">
+                        <a
+                        href="#"
+                        class="btn btn-warning btn-sm shadow border rounded"
+                        data-toggle="modal"
+                        data-target="#modal"
+                        ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a
+                      >
+                      </td>
+                      <td style="text-align:center">
+                        <form action="" method="">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger btn-sm shadow"><i class="fa fa-trash" aria-hidden="true"></i>
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        
+        <div class="col-4 mx-auto border rounded pt-4 pb-4 shadow p-3 mb-5 rounded" style="background-color: rgb(119, 37, 37);"> 
+            <h2 class="alert alert-danger border rounded shadow"> <small class="text-muted" > <i class="fa fa-list-alt" aria-hidden="true"></i> Add Activity 
+            </small></h2>
+              <hr>
+              <form action="/activities/user={{user}}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="title" class="text-muted" ><b>Activity Title</b></label>
+                  <input type="text" class="form-control shadow" id="title" aria-describedby="titleHelp" name="title" required>
+                  <small id="titleHelp" class="form-text text-muted"><strong>Add a activities to your list.</strong></small>
+                </div>
+                <div class="form-group">
+                  <label for="description" class="text-muted"><b>Type</b></label>
+                  <select id="inputState" class="form-control" name="type">
+                    <option selected>Choose...</option>
+                    {% for category in categories %}
+                    <option>{{category.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                    <label for="duration" class="text-muted"><b>Duration</b></label>
+                    <div class="range-wrap">
+                        <input type="range" class="range" name="duration">
+                        <output class="bubble"></output>
+                      </div>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                    <label for="duration" class="text-muted"><b>Date</b></label>
+                    <input class="form-control" type="datetime-local" value="" id="example-datetime-local-input" name="date">
+                </div>
+                <button type="submit" class="btn btn-danger btn-sm btn-block shadow">Add a activity</button>
+              </form>
+        </div>
+        </div>
+    </div>
+    <script>
+        const allRanges = document.querySelectorAll(".range-wrap");
+        allRanges.forEach(wrap => {
+        const range = wrap.querySelector(".range");
+        const bubble = wrap.querySelector(".bubble");
+
+        range.addEventListener("input", () => {
+            setBubble(range, bubble);
+        });
+        setBubble(range, bubble);
+        });
+
+        function setBubble(range, bubble) {
+        const val = range.value;
+        const min = range.min ? range.min : 0;
+        const max = range.max ? range.max : 100;
+        const newVal = Number(((val - min) * 100) / (max - min));
+        bubble.innerHTML = val;
+
+        // Sorta magic numbers based on size of the native UI thumb
+        bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+        }
+
+
+    </script>
+</main>
+
+  {% endblock %}

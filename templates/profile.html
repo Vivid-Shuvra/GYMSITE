@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<h2 class="text-center"><small class="text-muted">My Profile</small></h2>
+<div class="container border rounded">
+  <div class="row">
+    <div class="col-7 p-2 m-2">
+      <img
+        src="{% static 'img/icon/profile-graphic.svg' %}"
+        class="img-fluid"
+        alt="Responsive image"
+      />
+    </div>
+    <div class="col p-2 m-2 pl-8 ml-4">
+      <form class="justify-content-center" action="">
+        <div class="form-group">
+          <label for="img"
+            ><img class="" src="{% static 'img/icon/profile-icon.svg' %}" alt=""
+          /></label>
+          <input
+            style="visibility: hidden; width: 0; height: 0"
+            type="file"
+            id="img"
+            name="img"
+            accept="image/*"
+          />
+          <br />
+          <input
+            type="submit"
+            class="btn btn-outline-dark btn-sm disabled"
+            value="Choose"
+            style="text-transform: uppercase; color: cornsilk;"
+          />
+        </div>
+      </form>
+      <hr />
+      <form>
+        <fieldset disabled>
+          <div class="form-group row">
+            <label for="disabledTextInput" class="col-sm-2 col-form-label" 
+            style="text-transform: uppercase; color: cornsilk;"
+              >User Name</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="disabledTextInput"
+                class="form-control"
+                style="color: rgb(247, 245, 241); background-color: rgb(161, 43, 67);"
+                value="{{customers.name}}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="disabledSelect" class="col-sm-2 col-form-label"
+            style="text-transform: uppercase; color: cornsilk;"
+            >Email</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="disabledTextInput"
+                class="form-control"
+                style="color: rgb(255, 255, 255); background-color: rgb(153, 29, 54);"
+                value="{{customers.email}}"
+              />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="container border rounded">
+  <h3 class="text-center"><small class="text-muted">Membership</small></h3>
+  <div class="table-responsive-md mx-auto">
+    <table class="table table-striped table-hover table-bordered text-center">
+        <thead class="bg-danger">
+            <tr>              
+              <th scope="col">#</th>
+              <th scope="col">Price</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for membership in memberships %}
+            <tr class="text-light">
+              <th scope="row">{{forloop.counter}}</th>
+              <td> ৳ {{membership.price}}</td>
+              <td>{{membership.duration}}</td>
+              <td>{{membership.date}}</td>
+              {% if membership.status %}
+              <td><small class="badge badge-success">Joined</small></td>
+              {% else %}
+              <td><small class="badge badge-warning">Pending</small></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

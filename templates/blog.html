@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+<main>
+     <!--Slider-->
+     <div id="slider" class="container-fluid mt-0 px-0">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static 'img/hero/hero2.png' %}" alt="First slide"  height="300">
+                <div class="carousel-caption d-none d-md-block" style="text-transform: uppercase;">
+                  <h1 class="fade-in">Blogs</h1>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <hr />
+        <div class="container mx-auto">
+            {% for blog in blogs %}
+            <div class="media my-3 " style="border: 1px solid; padding: 10px;
+        box-shadow: 0 4px 8px 0 rgba(173, 157, 157, 0.2),
+              0 6px 20px 0 rgba(197, 73, 73, 0.19);">
+                <img class="align-self-center mr-3" src="{{blog.image.url}}" alt="Generic placeholder image">
+                <div class="media-body my-2">
+                    <h5 class="mt-0 mb-1" style="text-transform: uppercase;text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;"><a href="/blogdetails/{{blog.slug}}" class="text-light">{{blog.title}}</a></h5>
+                    <p class="text-light">{{blog.short_desc|slice:300}}...</p>
+                    <a href="/blogdetails/{{blog.slug}}"><button class="btn btn-danger btn-sm">Read More..</button></a>
+                    <div>
+                        <span class="badge badge-warning">{{blog.time}}</span>
+                    </div>
+                </div>
+             </div>
+             {% endfor %}
+                          <!--Pagination-->
+             <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                {% if prev%}
+                <li class="page-item">
+                  <a class="page-link text-light" href="/blogs?page={{prev}}" tabindex="-1" style="background-color: rgb(70, 1, 15);">&laquo; Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link text-light" href="#" tabindex="-1" style="background-color: rgb(160, 88, 102);">&laquo; Previous</a>
+                </li>
+                {% endif %}
+
+                {% for totPage in total_page %}
+                <li class="page-item"><a class="page-link text-light" href="/blogs?page={{totPage|add:1}}" style="background-color: rgb(70, 1, 15);">{{totPage|add:1}}</a></li>
+                {% endfor %}
+                
+                {% if nxt %}
+                <li class="page-item">
+                  <a class="page-link text-light" href="/blogs?page={{nxt}}" style="background-color: rgb(70, 1, 15);">Next &raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link text-light" href="#" style="background-color: rgb(155, 50, 71);">Next &raquo;</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+        </div>
+</main>
+{% endblock %}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymHut | Fancy Gym World</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- CSS here -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/activity.css' %}"> 
+  
+</head>
+<body style="background-color: rgb(19, 1, 1);">
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgb(70, 1, 15);">
+        <a class="navbar-brand" href="/"><img src="{% static 'img/logo/gymlogo.png' %}" alt=""> <img src="{% static 'img/logo/logos.png' %}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="align-items: center;">
+          <ul class="navbar-nav mr-auto" >
+            <li class="nav-item active">
+              <a class="nav-link" href="/" style="color: whitesmoke; text-transform: uppercase;">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about" style="color: whitesmoke;text-transform: uppercase;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/courses" style="color: whitesmoke;text-transform: uppercase;">Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/pricing" style="color: whitesmoke;text-transform: uppercase;">pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/gallery" style="color: whitesmoke;text-transform: uppercase;">Gallery</a>
+              </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/blogs" style="color: whitesmoke;text-transform: uppercase;">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/contact"  style="color: whitesmoke;text-transform: uppercase;">Contact</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+        {% if request.session.customer_id%}
+          <div class="dropdown mr-2"> 
+            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="text-transform: uppercase;">
+              <b>Hello {{user}}!</b>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-color: rgb(197, 66, 49);">
+                <div>
+                  <a class="dropdown-item" href="/profile/user={{user}}" style="text-transform: uppercase;"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a>
+                  <a class="dropdown-item" href="/activities/user={{user}}"  style="text-transform: uppercase;"><i class="fa fa-tasks" aria-hidden="true"></i> My Activities</a>
+                </div>
+             
+            </div>
+          </div>
+         <div>
+          <a href="/logout" class="btn btn-danger btn-lg" style="color: whitesmoke;text-transform: uppercase;">Logout </a> 
+         </div>
+      
+        {% else %}
+        <div class="float-right">
+            <a href="/registration" class="btn btn-danger btn-lg" style="color: whitesmoke;text-transform: uppercase;">Login/Signup</a> 
+        </div>
+        {% endif %}
+      </nav>
+
+      {% block content %} {% endblock %}
+
+
+      <br>
+      <div class="jumbotron jumbotron-fluid shadow " style="background-color: rgb(8, 1, 1);">
+        <div class="container mx-md-auto" style="height:120px;">
+          <div class="row justify-content-between">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
+                     <div class="float-left">
+                        <img src="{% static 'img/icon/icon1.png' %}" alt="">
+                      </div>
+                    {% for information in informations %}
+                    <div class="float-right" style="color: whitesmoke;">
+                        <h3>Location</h3>
+                        <p>{{information.locationTitle}} </p>
+                        <p>{{information.locationDesc}} </p>
+                    </div>
+                    {% endfor %}
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
+              <div class="float-left">
+                <img src="{% static 'img/icon/icon1.png' %}" alt="">
+              </div>
+                    {% for information in informations %}
+                    <div class="float-right" style="color: whitesmoke;">
+                        <h3>Phone</h3>
+                        <p>{{information.phone}}</p>
+                    </div>
+                    {% endfor %}
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
+              <div class="float-left">
+                <img src="{% static 'img/icon/icon1.png' %}" alt="">
+              </div>
+                    {% for information in informations %}
+                    <div class="float-right" style="color: whitesmoke;">
+                        <h3>Email</h3>
+                        <p>{{information.email}}</p>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+        </div>
+      </div>
+      <br>
+      <div id="social" class="row">
+        <div class="col mx-auto text-center">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-instagram"></a>
+      </div>
+    </div>
+      <br>
+    <footer>
+        <div class="footer-copyright text-center py-3 sticky-bottom" style="color: whitesmoke;">  Copyright &copy;<script>document.write(new Date().getFullYear());</script> | All rights reserved:
+            <h6>Curated with <i class="fa fa-heart" aria-hidden="true" style="color: crimson;"></i> by Myself</h6>
+            </div>
+    </footer>
+
+    <!-- Back to Top -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+var scrolltotop={setting:{startline:100,scrollto:0,scrollduration:1e3,fadeduration:[500,100]},
+controlHTML:'<img src="https://i1155.photobucket.com/albums/p559/scrolltotop/arrow23.png" />',
+controlattrs:{offsetx:5,offsety:5},anchorkeyword:"#top",state:{isvisible:!1,shouldvisible:!1},
+scrollup:function(){this.cssfixedsupport||this.$control.css({opacity:0});
+var t=isNaN(this.setting.scrollto)?this.setting.scrollto:parseInt(this.setting.scrollto);
+t="string"==typeof t&&1==jQuery("#"+t).length?jQuery("#"+t).offset().top:0,this.$body.animate({scrollTop:t},this.setting.scrollduration)},
+keepfixed:function(){var t=jQuery(window),o=t.scrollLeft()+t.width()-this.$control.width()-this.controlattrs.offsetx,s=t.scrollTop()+t.height()-this.$control.height()-this.controlattrs.offsety;this.$control.css({left:o+"px",top:s+"px"})},
+togglecontrol:function(){var t=jQuery(window).scrollTop();this.cssfixedsupport||this.keepfixed(),this.state.shouldvisible=t>=this.setting.startline?!0:!1,this.state.shouldvisible&&!this.state.isvisible?(this.$control.stop().animate({opacity:1},
+this.setting.fadeduration[0]),this.state.isvisible=!0):0==this.state.shouldvisible&&this.state.isvisible&&(this.$control.stop().animate({opacity:0},this.setting.fadeduration[1]),this.state.isvisible=!1)},
+init:function(){jQuery(document).ready(function(t){var o=scrolltotop,s=document.all;o.cssfixedsupport=!s||s&&"CSS1Compat"==document.compatMode&&window.XMLHttpRequest,o.$body=t(window.opera?"CSS1Compat"==document.compatMode?"html":"body":"html,body"),
+o.$control=t('<div id="topcontrol">'+o.controlHTML+"</div>").css({position:o.cssfixedsupport?"fixed":"absolute",bottom:o.controlattrs.offsety,right:o.controlattrs.offsetx,opacity:0,cursor:"pointer"}).attr({title:"Scroll to Top"}).click(function(){return o.scrollup(),!1}).appendTo("body"),
+document.all&&!window.XMLHttpRequest&&""!=o.$control.text()&&o.$control.css({width:o.$control.width()}),o.togglecontrol(),t('a[href="'+o.anchorkeyword+'"]').click(function(){return o.scrollup(),!1}),t(window).bind("scroll resize",function(t){o.togglecontrol()})})}};scrolltotop.init();
+</script>
+
+
+</main>
+
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static 'js/main.js' %}"></script>
+<script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    </script>
+   
+</body>
+</html>
